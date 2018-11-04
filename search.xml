@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[论文笔记 R-FCN]]></title>
     <url>%2F2018%2F11%2F04%2F%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0-R-FCN%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[R-FCNMotivation该文章的出发点是为了解决faster rcnn 系列的方法中，RPN得到若干个ROI后，对每一个ROI都要经过一个相对比较有计算量的subnet(classification, bbox regression)。 但是，再CNN 中插入 RPN，看起来是解决了proposal的问题，更深层次的是平衡了 translation-invariant in classification 与 translation variant in object detection之间的问题。 因此，作者的意图是得到一种特征图，而特征图中直接蕴藏着类别的信息。也就没有了ROI后续subnet 的结构。为此，作者提出了 Position-sensitive score map Approach作者的思想：其实是part-based的想法，将一个物体分为几块，每一块表示一个区域，比如左上区域，右下区域等等，然后通过feature map 中不同的channel去映射该区域属于一个物体某个区域的（如果分为9个区域，那么就是9个channel）概率的大小。 然后将所有channel中的对应区域重新assemble得到position-sensitive score map. Architecture Inference RPN 得到ROIs 每一个ROIs得到其对应的position-sensitive score map vote （average sum）成一个行向量（c维），因为有c个类别 sofxmax 得到ROI 的类别 与分类并行的task是 bbox regression。方法与classification 类似，只是再产生K*K*（c+1）维的feature map时，同时产生一个4K*k的一个feature map 用来进行regression。 Trainloss 与faster rcnn 的loss 并没有区别： Experiments]]></content>
   </entry>
   <entry>
     <title><![CDATA[Hello World]]></title>
